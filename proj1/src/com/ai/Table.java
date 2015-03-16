@@ -1,5 +1,7 @@
 package com.ai;
 
+import java.util.Arrays;
+
 /**
  * Created by lucas on 15/03/15.
  */
@@ -7,12 +9,12 @@ public class Table {
     int id;
     int[][] table;
     //produce a empty table and initiate it with a array value
-    public void Table(int x,int y,int[][] array) {
+    public Table(int x,int y,int[][] array) {
         table = new int[x][y];
         this.setTable(array);
     }
     //produce a empty table
-    public void Table(int x,int y) {
+    public Table(int x,int y) {
         table = new int[x][y];
     }
 
@@ -26,6 +28,22 @@ public class Table {
 
     public int[][] getTable() {
         return table;
+    }
+
+    @Override
+    public String toString() {
+        String str = new String();
+        for (int i=0; i<table.length;i++){
+            for (int j=0;j<table[i].length;j++){
+                if (j!=table[i].length-1)
+                str+=table[i][j]+" ";
+                else
+                    str+=table[i][j]+"";
+            }if (i!= table.length-1){
+                str+="\n";
+            }
+        }
+        return str;
     }
 
     public void setTable(int[][] table) {

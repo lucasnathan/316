@@ -1,5 +1,7 @@
 package com.ai;
 
+import java.util.ArrayList;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -13,7 +15,10 @@ public class Main {
         System.out.println(foo[0].length); //3
         System.out.println(foo[1].length); //4
         System.out.println(foo[2].length); //4
-
+        PreProcessing getPositions = new PreProcessing();
+        ArrayList<String> text = getPositions.ReadFile();
+        System.out.println(text.get(0).length());
+        ArrayList<Table> tables = getPositions.StringToTable(text);
 
     }
 }
