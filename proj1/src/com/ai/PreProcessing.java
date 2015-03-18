@@ -9,45 +9,41 @@ import java.util.ArrayList;
  * Created by lucas on 16/03/15.
  */
 public class PreProcessing {
-    public ArrayList<String> ReadFile() {
+    public String ReadFile(int i) {
         String text = new String();
         ArrayList<String> texts = new ArrayList<String>();
         //for (int i = 0; i < Text.length; i++) {
-            try (BufferedReader bufferedReader = new BufferedReader(new FileReader ("positions.txt"))) {
-                String currentLine;
-                while ((currentLine = bufferedReader.readLine()) != null) {
-                    if (currentLine.contains("board")){
-                        currentLine = bufferedReader.readLine();
-                    }else {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("positions.txt"))) {
+            String currentLine = new String();
 
-                        text += currentLine + "\n";
-                        currentLine = bufferedReader.readLine();
-                        text += currentLine + "\n";
-                        currentLine = bufferedReader.readLine();
-                        text += currentLine + "\n";
-                        currentLine = bufferedReader.readLine();
-                        text += currentLine + "\n";
-                        currentLine = bufferedReader.readLine();
-                        text += currentLine + "\n";
-                        currentLine = bufferedReader.readLine();
+            int max = i * 8;
+            i = max - 7;
+            int count = 1;
+            while (count < max && (currentLine = bufferedReader.readLine()) != null) {
+                if (count < i || currentLine.contains("board") || count == i + 1) {
+                    //System.out.println(count + "--------1--\n");
+                    count++;
+                    //currentLine = bufferedReader.readLine();
+                } else {
 
-                        texts.add(text);
-                        text = "";
+                    count++;
+                    text += currentLine + "\n";
+                    //currentLine = bufferedReader.readLine();
+                    texts.add(text);
+                    //text = "";
 
-                    }
+
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //}
-        return texts;
+        return text;
     }
-    public ArrayList<Table> StringToTable(ArrayList<String> text){
-        ArrayList<Table> tables = new ArrayList<Table>();
+    public static Table StringToTable(String text,int id){
 
-        for (int i=0;i<text.size(); i++){
-
-            String[] lines = text.get(i).split(System.getProperty("line.separator"));
+            String[] lines = text.split(System.getProperty("line.separator"));
             int[][] puzzle= new int[lines.length][lines.length];
             for (int l=0; l<lines.length;l++){
                 String[] positions = lines[l].split(" ");
@@ -56,15 +52,9 @@ public class PreProcessing {
                 }
             }
             Table table = new Table(lines.length,lines.length,puzzle);
-            table.setId(i+1);
-            tables.add(table);
-        }
-        for (Table tab: tables){
-            System.out.println(tab.getId());
-            System.out.println(tab.toString());
-            System.out.println();
-        }
-        return tables;
+            table.setId(id);
+            //System.out.println(table.toString());
+        return table;
     }
 
 }

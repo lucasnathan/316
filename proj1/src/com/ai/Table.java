@@ -50,18 +50,17 @@ public class Table {
         this.table = table;
     }
 
-    public boolean moveUp(int x,int y){
-        if(x > 0){
+    public boolean moveUp(int x,int y) {
+        if (x > 0) {
             int aux = table[x][y];
-            table[x][y] = table[x-1][y];
-            table[x-1][y]=aux;
+            table[x][y] = table[x - 1][y];
+            table[x - 1][y] = aux;
             return true;
         }
         return false;
     }
-
     public boolean moveDown(int x,int y){
-        if(x < table.length){
+        if(x < table.length-1){
             int aux = table[x][y];
             table[x][y] = table[x+1][y];
             table[x+1][y]=aux;
@@ -81,7 +80,7 @@ public class Table {
     }
 
     public boolean moveRight(int x,int y){
-        if(y < table[0].length){
+        if(y < table[0].length-1){
             int aux = table[x][y];
             table[x][y] = table[x][y+1];
             table[x][y+1]=aux;
@@ -89,17 +88,26 @@ public class Table {
         }
         return false;
     }
+    public int hashCode() {
+        return Arrays.deepHashCode(table);
+    }
 
-    public boolean findZero(int[] pos){
+    public int[] findZero(){
+        int[] pos = new int[3];
         for(int x=0; x<table.length;x++){
             for (int y=0; y<table[0].length;y++){
                 if (table[x][y]==0){
                     pos[0]=x;
                     pos[1]=y;
-                    return true;
+                    pos[2]=1;
+                    return pos;
                 }
             }
         }
-        return false;
+        pos[2]=0;
+        return pos;
     }
+
+
+
 }
