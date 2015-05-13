@@ -8,13 +8,14 @@ import java.util.Arrays;
 public class Table {
     int id;
     int[][] table;
-    //produce a empty table and initiate it with a array value
-    public Table(int x,int y,int[][] array) {
+
+
+    public Table(int x, int y, int[][] array) {
         table = new int[x][y];
         this.setTable(array);
     }
-    //produce a empty table
-    public Table(int x,int y) {
+
+    public Table(int x, int y) {
         table = new int[x][y];
     }
 
@@ -33,14 +34,15 @@ public class Table {
     @Override
     public String toString() {
         String str = new String();
-        for (int i=0; i<table.length;i++){
-            for (int j=0;j<table[i].length;j++){
-                if (j!=table[i].length-1)
-                str+=table[i][j]+" ";
+        for (int i = 0; i < table.length; i++) {
+            for (int j = 0; j < table[i].length; j++) {
+                if (j != table[i].length - 1)
+                    str += table[i][j] + " ";
                 else
-                    str+=table[i][j]+"";
-            }if (i!= table.length-1){
-                str+="\n";
+                    str += table[i][j] + "";
+            }
+            if (i != table.length - 1) {
+                str += "\n";
             }
         }
         return str;
@@ -50,7 +52,7 @@ public class Table {
         this.table = table;
     }
 
-    public boolean moveUp(int x,int y) {
+    public boolean moveUp(int x, int y) {
         if (x > 0) {
             int aux = table[x][y];
             table[x][y] = table[x - 1][y];
@@ -59,55 +61,56 @@ public class Table {
         }
         return false;
     }
-    public boolean moveDown(int x,int y){
-        if(x < table.length-1){
+
+    public boolean moveDown(int x, int y) {
+        if (x < table.length - 1) {
             int aux = table[x][y];
-            table[x][y] = table[x+1][y];
-            table[x+1][y]=aux;
+            table[x][y] = table[x + 1][y];
+            table[x + 1][y] = aux;
             return true;
         }
         return false;
     }
 
-    public boolean moveLeft(int x,int y){
-        if(y > 0){
+    public boolean moveLeft(int x, int y) {
+        if (y > 0) {
             int aux = table[x][y];
-            table[x][y] = table[x][y-1];
-            table[x][y-1]=aux;
+            table[x][y] = table[x][y - 1];
+            table[x][y - 1] = aux;
             return true;
         }
         return false;
     }
 
-    public boolean moveRight(int x,int y){
-        if(y < table[0].length-1){
+    public boolean moveRight(int x, int y) {
+        if (y < table[0].length - 1) {
             int aux = table[x][y];
-            table[x][y] = table[x][y+1];
-            table[x][y+1]=aux;
+            table[x][y] = table[x][y + 1];
+            table[x][y + 1] = aux;
             return true;
         }
         return false;
     }
+
     public int hashCode() {
         return Arrays.deepHashCode(table);
     }
 
-    public int[] findZero(){
+    public int[] findZero() {
         int[] pos = new int[3];
-        for(int x=0; x<table.length;x++){
-            for (int y=0; y<table[0].length;y++){
-                if (table[x][y]==0){
-                    pos[0]=x;
-                    pos[1]=y;
-                    pos[2]=1;
+        for (int x = 0; x < table.length; x++) {
+            for (int y = 0; y < table[0].length; y++) {
+                if (table[x][y] == 0) {
+                    pos[0] = x;
+                    pos[1] = y;
+                    pos[2] = 1;
                     return pos;
                 }
             }
         }
-        pos[2]=0;
+        pos[2] = 0;
         return pos;
     }
-
 
 
 }
